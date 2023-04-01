@@ -8,11 +8,6 @@ namespace WPF_MVVM_12.Models
 {
     class Manager:IBankWorker
     {
-        public void PrintClients()
-        {
-            throw new NotImplementedException();
-        }
-
         public void ChangeTelefonNumber(int id, string number)
         {
             throw new NotImplementedException();
@@ -28,9 +23,20 @@ namespace WPF_MVVM_12.Models
             throw new NotImplementedException();
         }
 
-        public void AddClient(string idDepartment, string fullName, string telefonNumber, string pasportNumber)
+        public void AddClient(Department department, string name, string surname, string patronymic, string telefonNumber, string pasportNumber)
         {
-            throw new NotImplementedException();
+            department.clients.Add(new Client(
+                            $"{department.DepartmentId}",
+                            surname,
+                            name,
+                            patronymic,
+                            telefonNumber,
+                            pasportNumber,
+                            $"{DateTime.Now}",
+                            "Manager",
+                            "created"
+                            ));
+            
         }
 
         public void DelClient(int id)

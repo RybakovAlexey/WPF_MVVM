@@ -17,8 +17,10 @@ namespace WPF_MVVM_12.Models
 
 
         public void AddClient(
-            string idDepartment,
-            string fullName,
+            Department department,
+            string Name,
+            string Surname,
+            string Patronymic,
             string telefonNumber,
             string pasportNumber);
 

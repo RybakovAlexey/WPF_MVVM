@@ -44,7 +44,7 @@
                   Grid.Column="2" 
                   Grid.RowSpan="3"
                   FrozenColumnCount="3"
-                  ItemsSource="{Binding GetDepartment, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding SelectedDepartment.clients }"
                   >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID деп" 
@@ -111,13 +111,15 @@
 
         <Expander 
             Margin="10"
-            Header="Добавить сотрудника"
+            Header="Добавить клиента"
             Grid.Column="0"
             Grid.Row="1">
             <GroupBox Padding="5">
                 <StackPanel>
                     <TextBlock>Выбор департамента</TextBlock>
-                    <ComboBox x:Name="departmentsBoxAdd" ItemsSource="{Binding ElementName =departmentsBox, Path=Items}" >
+                    <ComboBox x:Name="departmentsBoxAdd" 
+                              ItemsSource="{Binding Departments}" 
+                              SelectedItem="{Binding SelectedDepartmentToAdd}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding DepartmentName}"/>
@@ -125,19 +127,20 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Label>Имя</Label>
-                    <TextBox></TextBox>
+                    <TextBox Text="{Binding NameAdd}"/>
                     <Label>Фамилия</Label>
-                    <TextBox></TextBox>
+                    <TextBox Text="{Binding SurnameAdd}"/>
                     <Label>Отчество</Label>
-                    <TextBox></TextBox>
+                    <TextBox Text="{Binding PatronymicAdd}"/>
                     <Label>Номер телефона</Label>
-                    <TextBox></TextBox>
+                    <TextBox Text="{Binding TelefonAdd}"/>
                     <Label>Паспорт</Label>
-                    <TextBox></TextBox>
-                    <Button Background="#3DB7A4"
-                            Content="Добавить"
-                            Margin="30,20,30,0 "
-                            />
+                    <TextBox Text="{Binding PassportAdd}"/>
+                    <Button
+                        Command="{Binding ClickAdd}"
+                        Background="#3DB7A4"
+                        Content="Добавить"
+                        Margin="30,20,30,0 "/>
                 </StackPanel>
             </GroupBox>
 

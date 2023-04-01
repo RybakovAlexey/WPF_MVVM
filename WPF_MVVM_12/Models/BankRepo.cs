@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,10 +15,11 @@ namespace WPF_MVVM_12.Models
 {
     class BankRepo
     {
-        public static ObservableCollection<Department> Departments { get; set; }
-        public static ObservableCollection<Client> Clients { get; private set; }
+        public  ObservableCollection<Department> Departments { get; set; }
+        public  ObservableCollection<Client> Clients { get; private set; }
 
-        public void ReadClients()
+
+    public void ReadFromBase()
         {
             using (FileStream fs1 = new FileStream("bankDepartments.json", FileMode.OpenOrCreate))
             {
@@ -25,18 +28,19 @@ namespace WPF_MVVM_12.Models
                     Departments = JsonSerializer.Deserialize<ObservableCollection<Department>>(fs1);
                     Debug.Print("Data departments has been read");
                 }
+                else CreateBase();
             }
         }
 
-        public async Task SaveClientsAsync()
+        public void SaveInBase()
         {
             using (FileStream fs = new FileStream("bankDepartments.json", FileMode.Create))
             {
-                await JsonSerializer.SerializeAsync<ObservableCollection<Department>>(fs, Departments);
+                JsonSerializer.Serialize<ObservableCollection<Department>>(fs, Departments);
                 Debug.Print("Data Departments has been saved to file");
             }
         }
-        public void AddClients()
+        public void CreateBase()
         {
             Departments = new ObservableCollection<Department>();
             int Count = 5;
@@ -62,6 +66,7 @@ namespace WPF_MVVM_12.Models
                 }
                 Departments.Add(new Department($"департамент{d}", d, Clients));
             }
+            Debug.Print("Data Departments has been created");
         }
     }
 }

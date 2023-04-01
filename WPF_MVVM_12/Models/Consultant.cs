@@ -8,10 +8,6 @@ namespace WPF_MVVM_12.Models
 {
     class Consultant:IBankWorker
     {
-        public void PrintClients()
-        {
-            throw new NotImplementedException();
-        }
 
         public void ChangeTelefonNumber(int id, string number)
         {
@@ -28,7 +24,7 @@ namespace WPF_MVVM_12.Models
             throw new NotImplementedException();
         }
 
-        public void AddClient(string idDepartment, string fullName, string telefonNumber, string pasportNumber)
+        public void AddClient(Department department, string name, string surname, string patronymic, string telefonNumber, string pasportNumber)
         {
             throw new NotImplementedException();
         }

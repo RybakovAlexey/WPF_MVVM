@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -15,49 +17,65 @@ using WPF_MVVM_12.Views;
 
 namespace WPF_MVVM_12.ViewModels
 {
-    class ManagerViewModel: INotifyPropertyChanged
+    class ManagerViewModel: BaseVM
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void OnPropertyChenged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
         BankRepo repo = new BankRepo();
         IBankWorker worker = new Manager();
-        public ObservableCollection<Department> Departments
-        {
-            get { return BankRepo.Departments; }
-            set { }
-        }
-        private Department selectedDepartament;
+
+        public ObservableCollection<Department> Departments{get { return repo.Departments; } }
+
+        private Department selectedDepartament=new Department("",0,new ObservableCollection<Client>());
+        
         public Department SelectedDepartment {
-
-            set { 
-                selectedDepartament = value; 
-                OnPropertyChenged(); }
+            get { return selectedDepartament; }
+            set {selectedDepartament = value; OnPropertyChanged("SelectedDepartment");}
         }
 
-        public Department GetDepartment {
-            get { return selectedDepartament; } 
-            set { selectedDepartament = value; } 
-        }
+        private Department selectedDepartmentToAdd;
+        public Department SelectedDepartmentToAdd {set { selectedDepartmentToAdd = value; }}
 
-        public ManagerViewModel() {
+        private string nameAdd;
+        public string NameAdd { set { nameAdd = value; OnPropertyChanged("NameAdd"); } }
 
-;
-            repo.AddClients();
-            //repo.ReadClients();     
-            
+        private string surnameAdd;
+        public string SurnameAdd { set {  surnameAdd = value; OnPropertyChanged("SurnameAdd"); } }
+
+        private string patronymicAdd;
+
+        public string PatronymicAdd { set {  patronymicAdd = value; OnPropertyChanged("PatronymicAdd"); } }
+
+        private string telefonAdd;
+        public string TelefonAdd { set { telefonAdd = value; OnPropertyChanged("TelefonAdd"); } }
+
+        private string passportAdd;
+        public string PassportAdd { set { passportAdd = value; OnPropertyChanged("PassportAdd"); } }
+
+        public ManagerViewModel()
+        {
+
+            repo.ReadFromBase();
         }
 
         public ICommand ClickSave => new DelegateCommand((obj) =>
                                                   {
-                                                      repo.SaveClientsAsync();
+                                                      repo.SaveInBase();
+                                                      Application.Current.Shutdown();
                                                   });
         public ICommand ClickAdd => new DelegateCommand((obj) =>
         {
-            worker.AddClient("1","qqq", "123", "345");
-        });
+            worker.AddClient(selectedDepartmentToAdd, nameAdd, surnameAdd, patronymicAdd, telefonAdd, passportAdd);
+            NameAdd = null;
+            SurnameAdd = null;
+            PatronymicAdd = null;
+            TelefonAdd = null;
+            PassportAdd = null;
+        }, (obj) => selectedDepartmentToAdd !=null&&
+        nameAdd!=null&&
+        surnameAdd!=null&&
+        patronymicAdd!=null&&
+        telefonAdd!=null&&
+        passportAdd!=null);
+        
+        
     }
 }
