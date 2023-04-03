@@ -19,12 +19,13 @@ namespace WPF_MVVM_12.ViewModels
 {
     class ManagerViewModel: BaseVM
     {
+        public event NotifyCollectionChangedEventHandler? CollectionChanged;
         BankRepo repo = new BankRepo();
         IBankWorker worker = new Manager();
 
         public ObservableCollection<Department> Departments{get { return repo.Departments; } }
 
-        private Department selectedDepartament=new Department("",0,new ObservableCollection<Client>());
+        private Department selectedDepartament=new Department("",0,new BindingList<Client>());
         
         public Department SelectedDepartment {
             get { return selectedDepartament; }
@@ -35,10 +36,10 @@ namespace WPF_MVVM_12.ViewModels
         public Department SelectedDepartmentToAdd {set { selectedDepartmentToAdd = value; }}
 
         private string nameAdd;
-        public string NameAdd { set { nameAdd = value; OnPropertyChanged("NameAdd"); } }
+        public string NameAdd { set { nameAdd = value;  } }
 
         private string surnameAdd;
-        public string SurnameAdd { set {  surnameAdd = value; OnPropertyChanged("SurnameAdd"); } }
+        public string SurnameAdd { set {  surnameAdd = value;  } }
 
         private string patronymicAdd;
 
@@ -48,6 +49,7 @@ namespace WPF_MVVM_12.ViewModels
         public string TelefonAdd { set { telefonAdd = value; OnPropertyChanged("TelefonAdd"); } }
 
         private string passportAdd;
+
         public string PassportAdd { set { passportAdd = value; OnPropertyChanged("PassportAdd"); } }
 
         public ManagerViewModel()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,9 @@ namespace WPF_MVVM_12.Models
         public string DepartmentName { get; set; }
         public int DepartmentId { get; set; }
 
-        public ObservableCollection<Client> clients { get; set; }
+        public BindingList<Client> clients { get; set; }
 
-        public Department(string DepartmentName, int DepartmentId, ObservableCollection<Client> clients)
+        public Department(string DepartmentName, int DepartmentId, BindingList<Client> clients)
         {
             this.DepartmentName = DepartmentName;
             this.DepartmentId = DepartmentId;

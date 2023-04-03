@@ -17,7 +17,7 @@ namespace WPF_MVVM_12.Models
     class BankRepo:BaseVM
     {
         public  ObservableCollection<Department> Departments { get; set; }
-        public  ObservableCollection<Client> Clients { get; private set; }
+        private BindingList<Client> Clients { get; set; }
 
 
 
@@ -50,7 +50,7 @@ namespace WPF_MVVM_12.Models
 
             for (int d = 1; d < Count; d++)
             {
-                Clients = new ObservableCollection<Client>();
+                Clients = new BindingList<Client>();
 
                 for (int c = 1; c < 4; c++)
                 {
