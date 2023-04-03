@@ -10,13 +10,15 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using WPF_MVVM_12.ViewModels;
 
 namespace WPF_MVVM_12.Models
 {
-    class BankRepo
+    class BankRepo:BaseVM
     {
         public  ObservableCollection<Department> Departments { get; set; }
         public  ObservableCollection<Client> Clients { get; private set; }
+
 
 
     public void ReadFromBase()
@@ -31,6 +33,7 @@ namespace WPF_MVVM_12.Models
                 else CreateBase();
             }
         }
+
 
         public void SaveInBase()
         {
