@@ -21,12 +21,13 @@ namespace WPF_MVVM_12.Models
                 this.DateChange = $"{DateTime.Now}";
                 this.WhatChange = $"{prop}";
                 this.WhoChange = $"кто?";
+                Debug.WriteLine($"{this.IdDepartment} {this.Surname} {prop} was changed");
             }
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-
-            Debug.WriteLine($"{this.IdDepartment} {this.Surname} {prop} was changed");
+            
         }
+
         public string IdDepartment { get; set; }
         private string surname;
         public string Surname

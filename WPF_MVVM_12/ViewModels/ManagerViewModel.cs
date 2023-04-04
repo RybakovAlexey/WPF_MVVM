@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using WPF_MVVM_12.Models;
 using WPF_MVVM_12.Views;
+using System.ComponentModel;
 
 namespace WPF_MVVM_12.ViewModels
 {
@@ -27,19 +28,20 @@ namespace WPF_MVVM_12.ViewModels
 
         private Department selectedDepartament=new Department("",0,new BindingList<Client>());
         
+
         public Department SelectedDepartment {
             get { return selectedDepartament; }
             set {selectedDepartament = value; OnPropertyChanged("SelectedDepartment");}
         }
-
+       
         private Department selectedDepartmentToAdd;
         public Department SelectedDepartmentToAdd {set { selectedDepartmentToAdd = value; }}
 
         private string nameAdd;
-        public string NameAdd { set { nameAdd = value;  } }
+        public string NameAdd { set { nameAdd = value; OnPropertyChanged("NameAdd"); } }
 
         private string surnameAdd;
-        public string SurnameAdd { set {  surnameAdd = value;  } }
+        public string SurnameAdd { set {  surnameAdd = value; OnPropertyChanged("SurnameAdd"); } }
 
         private string patronymicAdd;
 
@@ -56,6 +58,7 @@ namespace WPF_MVVM_12.ViewModels
         {
 
             repo.ReadFromBase();
+           // selectedDepartament.ListCh += 
         }
 
         public ICommand ClickSave => new DelegateCommand((obj) =>
