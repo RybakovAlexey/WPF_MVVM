@@ -69,18 +69,27 @@ namespace WPF_MVVM_12.ViewModels
         public ICommand ClickAdd => new DelegateCommand((obj) =>
         {
             worker.AddClient(selectedDepartmentToAdd, nameAdd, surnameAdd, patronymicAdd, telefonAdd, passportAdd);
+            ClearAddFields();
+        }, (obj) => AddFieldsNotEmpty());
+        
+        private void ClearAddFields()
+        {
             NameAdd = null;
             SurnameAdd = null;
             PatronymicAdd = null;
             TelefonAdd = null;
             PassportAdd = null;
-        }, (obj) => selectedDepartmentToAdd !=null&&
-        nameAdd!=null&&
-        surnameAdd!=null&&
-        patronymicAdd!=null&&
-        telefonAdd!=null&&
-        passportAdd!=null);
-        
-        
+        }
+
+        private bool AddFieldsNotEmpty()
+        {
+            return 
+                    selectedDepartmentToAdd != null &&
+                    nameAdd != null &&
+                    surnameAdd != null &&
+                    patronymicAdd != null &&
+                    telefonAdd != null &&
+                    passportAdd != null;
+        }
     }
 }
