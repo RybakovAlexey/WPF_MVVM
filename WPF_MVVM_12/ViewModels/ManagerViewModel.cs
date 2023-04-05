@@ -21,17 +21,21 @@ namespace WPF_MVVM_12.ViewModels
     class ManagerViewModel: BaseVM
     {
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
-        BankRepo repo = new BankRepo();
-        IBankWorker worker = new Manager();
 
+        IBankWorker worker = new Manager();
+        BankRepo repo = new BankRepo();
+        
         public ObservableCollection<Department> Departments{get { return repo.Departments; } }
 
         private Department selectedDepartament=new Department("",0,new BindingList<Client>());
         
-
+        
         public Department SelectedDepartment {
             get { return selectedDepartament; }
-            set {selectedDepartament = value; OnPropertyChanged("SelectedDepartment");}
+            set {selectedDepartament = value; OnPropertyChanged("SelectedDepartment");
+                foreach (Client c in selectedDepartament.clients)
+                { c.WorkerNow = worker.WorkerToString(); }
+            }
         }
        
         private Department selectedDepartmentToAdd;
@@ -56,10 +60,13 @@ namespace WPF_MVVM_12.ViewModels
 
         public ManagerViewModel()
         {
-
             repo.ReadFromBase();
-           // selectedDepartament.ListCh += 
+            Debug.WriteLine(worker.WorkerToString());
+
+
         }
+
+
 
         public ICommand ClickSave => new DelegateCommand((obj) =>
                                                   {

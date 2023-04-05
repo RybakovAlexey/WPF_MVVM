@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_MVVM_12.Models;
 
 namespace WPF_MVVM_12.ViewModels
 {
@@ -14,8 +15,7 @@ namespace WPF_MVVM_12.ViewModels
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
-
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));    
         }
     }
 }

@@ -19,9 +19,13 @@ namespace WPF_MVVM_12.Views
     /// </summary>
     public partial class ChooseWorker : Window
     {
+
         public ChooseWorker()
         {
+
             InitializeComponent();
+
         }
+
     }
 }
