@@ -33,7 +33,7 @@ namespace WPF_MVVM_12.Models
                             telefonNumber,
                             pasportNumber,
                             $"{DateTime.Now}",
-                            "Manager",
+                            WorkerToString(),
                             "created"
                             ));
             

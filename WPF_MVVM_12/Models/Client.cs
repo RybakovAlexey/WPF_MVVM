@@ -21,8 +21,8 @@ namespace WPF_MVVM_12.Models
             {
                 this.DateChange = $"{DateTime.Now}";
                 this.WhatChange = $"{prop}";
-                this.WhoChange = $"{WorkerNow}";
-                Debug.WriteLine($"{this.IdDepartment} {this.Surname} {prop} was changed");
+                this.WhoChange = WorkerNow;
+                Debug.WriteLine($"{this.IdDepartment} {this.Surname} {prop} was changed {WorkerNow}");
             }
             
 
