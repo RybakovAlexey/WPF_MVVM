@@ -27,7 +27,7 @@ namespace WPF_MVVM_12.Models
 
         public void DelClient(int id);
 
-        public string WorkerToString();
+        public string NameToString();
     }
 
 }

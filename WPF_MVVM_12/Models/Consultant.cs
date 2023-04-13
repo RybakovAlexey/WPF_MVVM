@@ -34,7 +34,7 @@ namespace WPF_MVVM_12.Models
             throw new NotImplementedException();
         }
 
-        public string WorkerToString()
+        public string NameToString()
         {
             return "Consultant";
         }

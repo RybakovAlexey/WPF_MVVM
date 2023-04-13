@@ -5,6 +5,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using WPF_MVVM_12.Models;
 
 namespace WPF_MVVM_12.ViewModels
@@ -12,10 +15,11 @@ namespace WPF_MVVM_12.ViewModels
     internal class BaseVM: INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-
+        
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));    
         }
+
     }
 }

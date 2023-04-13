@@ -1,40 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Automation;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
 using WPF_MVVM_12.Models;
-using WPF_MVVM_12.Views;
-using System.ComponentModel;
+
 
 namespace WPF_MVVM_12.ViewModels
 {
     class ManagerViewModel: BaseVM
     {
-        public event NotifyCollectionChangedEventHandler? CollectionChanged;
-
         IBankWorker worker = new Manager();
         BankRepo repo = new BankRepo();
-        
         public ObservableCollection<Department> Departments{get { return repo.Departments; } }
 
         private Department selectedDepartament=new Department("",0,new BindingList<Client>());
-        
-        
+
+        private string nameWorker;
+
+        public string NameWorker { get {return nameWorker; } set { nameWorker = value; OnPropertyChanged($"{nameWorker}"); } }
+
         public Department SelectedDepartment {
             get { return selectedDepartament; }
             set {selectedDepartament = value; OnPropertyChanged("SelectedDepartment");
-                foreach (Client c in selectedDepartament.clients)
-                { c.WorkerNow = worker.WorkerToString(); }
             }
         }
        
@@ -61,9 +50,8 @@ namespace WPF_MVVM_12.ViewModels
         public ManagerViewModel()
         {
             repo.ReadFromBase();
-            Debug.WriteLine(worker.WorkerToString());
-
-
+            PropertyChanged += Client.ClientPropertyChanged;
+            NameWorker = worker.NameToString();
         }
 
 

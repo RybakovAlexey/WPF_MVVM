@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using WPF_MVVM_12.ViewModels;
 
 namespace WPF_MVVM_12.Models
@@ -21,17 +22,23 @@ namespace WPF_MVVM_12.Models
             {
                 this.DateChange = $"{DateTime.Now}";
                 this.WhatChange = $"{prop}";
-                this.WhoChange = WorkerNow;
-                Debug.WriteLine($"{this.IdDepartment} {this.Surname} {prop} was changed {WorkerNow}");
+                this.WhoChange = nameWorker;
+                Debug.WriteLine($"{this.IdDepartment} {this.Surname} {prop} was changed ");
             }
             
-
+            
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
             
         }
 
-        public string WorkerNow {get; set;}
-       
+        internal static void ClientPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals("Manager")) { nameWorker = e.PropertyName; }
+            if (e.PropertyName.Equals("Consultant")) { nameWorker = e.PropertyName; }
+
+        }
+
+        static string nameWorker;
         public string IdDepartment { get; set; }
         private string surname;
         public string Surname
@@ -81,8 +88,6 @@ namespace WPF_MVVM_12.Models
             set { whatChange = value; OnPropertyChanged("WhatChange"); }
         }
 
-
-
         public Client(
             string IdDepartment,
             string Surname,
@@ -105,5 +110,6 @@ namespace WPF_MVVM_12.Models
             this.WhoChange = WhoChange;
             this.WhatChange = WhatChange;
         }
+
     }
 }
