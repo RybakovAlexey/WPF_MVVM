@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -8,14 +9,10 @@ namespace WPF_MVVM_12.ViewModels
 {
     internal class ConsutantViewModel:BaseVM
     {
-
         
+
         IBankWorker worker = new Consultant();
         BankRepo repo = new BankRepo();
-
-        private string nameWorker;
-
-        public string NameWorker { get { return nameWorker; } set { nameWorker = value; OnPropertyChanged($"{nameWorker}"); } }
 
         public ObservableCollection<Department> Departments
         {
@@ -32,7 +29,7 @@ namespace WPF_MVVM_12.ViewModels
         public ConsutantViewModel()
         {
             repo.ReadFromBase();
-            PropertyChanged += Client.ClientPropertyChanged;
+            
             NameWorker = worker.NameToString();
         }
 

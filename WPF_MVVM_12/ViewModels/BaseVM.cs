@@ -20,6 +20,17 @@ namespace WPF_MVVM_12.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));    
         }
-
+        
+        public event EventHandler ChangeWorker;
+        private string nameWorker;
+        public string NameWorker { 
+                                    get { return nameWorker; } 
+                                    set { nameWorker = value; ChangeWorker?.Invoke(this, new EventArgs()); } 
+                                  }
+        public BaseVM() 
+        {   
+            ChangeWorker += Client.EventHandler;
+        }
     }
+
 }

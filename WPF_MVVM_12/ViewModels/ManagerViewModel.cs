@@ -17,10 +17,6 @@ namespace WPF_MVVM_12.ViewModels
 
         private Department selectedDepartament=new Department("",0,new BindingList<Client>());
 
-        private string nameWorker;
-
-        public string NameWorker { get {return nameWorker; } set { nameWorker = value; OnPropertyChanged($"{nameWorker}"); } }
-
         public Department SelectedDepartment {
             get { return selectedDepartament; }
             set {selectedDepartament = value; OnPropertyChanged("SelectedDepartment");
@@ -50,7 +46,6 @@ namespace WPF_MVVM_12.ViewModels
         public ManagerViewModel()
         {
             repo.ReadFromBase();
-            PropertyChanged += Client.ClientPropertyChanged;
             NameWorker = worker.NameToString();
         }
 

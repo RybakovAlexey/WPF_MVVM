@@ -31,12 +31,11 @@ namespace WPF_MVVM_12.Models
             
         }
 
-        internal static void ClientPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        public static void EventHandler(object sender, EventArgs e)
         {
-            if (e.PropertyName.Equals("Manager")) { nameWorker = e.PropertyName; }
-            if (e.PropertyName.Equals("Consultant")) { nameWorker = e.PropertyName; }
-
+            nameWorker = ((BaseVM)sender).NameWorker;
         }
+
 
         static string nameWorker;
         public string IdDepartment { get; set; }
